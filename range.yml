@@ -1,0 +1,12 @@
+ludus:
+  - vm_name: "{{ range_id }}-test"
+    hostname: "{{ range_id }}-test"
+    template: debian-11-x64-server-template 
+    vlan: 57
+    ip_last_octet: 12
+    ram_gb: 2
+    cpus: 1
+    linux: true
+    testing:
+      snapshot: true
+      block_internet: true
