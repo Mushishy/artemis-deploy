@@ -87,7 +87,7 @@ ludus templates build -n debian-11-x64-server-template
 
 For more information, follow the [Ludus template documentation](https://docs.ludus.cloud/docs/quick-start/build-templates).
 
-## 5. After succseffully building your range run Ansible Playbook
+## 5. After succseffully building your first range run Ansible Playbook to deploy system Artemis
 
 ```bash
 sudo ansible-playbook -c local -i "localhost," ./playbook.yml -v > out.log
