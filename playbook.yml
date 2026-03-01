@@ -9,7 +9,9 @@
         go_install_dir: "/usr/local/go"
         node_version: "v25.6.0"
         node_url: "https://nodejs.org/dist/v25.6.0/node-v25.6.0-linux-x64.tar.xz"
+        scenario_api_repo: "https://github.com/Mushishy/scenario-manager-api.git"
         scenario_api_dir: "/opt/scenario-manager-api"
+        frontend_repo: "https://github.com/Mushishy/artemis-frontend.git"
         frontend_dir: "/opt/artemis-frontend"
         ssl_dir: "/etc/nginx/ssl"
 
@@ -229,7 +231,7 @@
       
     - name: Clone scenario-manager-api repository
       git:
-        repo: "https://github.com/Mushishy/scenario-manager-api"
+        repo: "{{ scenario_api_repo }}"
         dest: "/tmp/scenario-manager-api"
         version: main
 
@@ -251,7 +253,7 @@
         openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 3650
         -keyout {{ scenario_api_dir }}/certs/pve-ssl.key
         -out {{ scenario_api_dir }}/certs/pve-ssl.pem
-        -subj "/C=SK/ST=Slovakia/L=Bratislava/O=STU/OU=ARTEMIS/CN=100.67.101.72"
+        -subj "/C=SK/ST=Slovakia/L=Bratislava/O=STU/OU=ARTEMIS/CN=scenario-manager-api"
       args:
         creates: "{{ scenario_api_dir }}/certs/pve-ssl.pem"
 
@@ -345,7 +347,7 @@
         
     - name: Clone artemis-frontend repository
       git:
-        repo: "https://github.com/Mushishy/artemis-frontend.git"
+        repo: "{{ frontend_repo }}"
         dest: "{{ frontend_dir }}"
         version: main
 
