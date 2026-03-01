@@ -3,14 +3,12 @@
 ## 1. Install Debian 13 and Basic Tools
 
 ```bash
-apt install sudo 
-
 su -
 apt update -y
 apt-get update -y
 apt-get upgrade -y
 
-apt install nano vim tmux net-tools
+apt install nano vim tmux net-tools -y
 export PIP_ROOT_USER_ACTION=ignore
 ```
 
@@ -53,7 +51,7 @@ ssh-copy-id -i ~/.ssh/ludus.pub user@hostname
 Harden SSH by editing `/etc/ssh/sshd_config`:
 
 ```bash
-sudo nano /etc/ssh/sshd_config
+nano /etc/ssh/sshd_config
 ```
 
 Add these settings:
