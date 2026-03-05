@@ -245,7 +245,7 @@
       loop:
         - "{{ scenario_api_dir }}/certs"
         - "{{ scenario_api_dir }}/data/pools"
-        - "{{ scenario_api_dir }}/data/scenarios" 
+        - "{{ scenario_api_dir }}/data/ctfd_scenarios" 
         - "{{ scenario_api_dir }}/data/topologies"
 
     - name: Generate SSL certificates for scenario-manager-api
