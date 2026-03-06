@@ -17,7 +17,7 @@
 
 - name: Cleanup Existing Artemis Infrastructure
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Stop all services
       systemd:
@@ -28,7 +28,7 @@
         - artemis-frontend
         - nginx
       failed_when: false
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Disable all services
       systemd:
@@ -39,7 +39,7 @@
         - artemis-frontend
         - nginx
       failed_when: false
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Remove systemd service files
       file:
@@ -53,8 +53,8 @@
       apt:
         name: nginx*
         state: absent
-        purge: yes
-        autoremove: yes
+        purge: true
+        autoremove: true
 
     - name: Remove nginx directories and configs
       file:
@@ -123,7 +123,7 @@
 
     - name: Reload systemd after cleanup
       systemd:
-        daemon_reload: yes
+        daemon_reload: true
 
     - name: Wait for cleanup to complete
       pause:
@@ -131,7 +131,7 @@
 
 - name: Install System Dependencies
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Install system packages
       apt:
@@ -144,7 +144,7 @@
           - tmux 
           - net-tools
         state: present
-        update_cache: yes
+        update_cache: true
 
     - name: Check if Go is installed with correct version
       command: /usr/local/go/bin/go version
@@ -213,7 +213,7 @@
 
 - name: Deploy Scenario Manager API
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Add git safe directory for scenario-manager-api
       git_config:
@@ -278,7 +278,7 @@
     - name: Copy /tmp/scenario-manager-api/server/data/topologies/ctfdev directory to scenario-manager-api data directory
       copy:
         src: "/tmp/scenario-manager-api/server/data/topologies/ctfdev/"
-        dest: "{{ scenario_api_dir }}/data/ctfdev"
+        dest: "{{ scenario_api_dir }}/data/topologies/ctfdev"
         owner: ludus
         group: ludus
         mode: '0755'
@@ -331,7 +331,7 @@
         state: directory
         owner: ludus
         group: ludus
-        recurse: yes
+        recurse: true
 
     - name: Clean up temporary scenario-manager-api directory
       file:
@@ -340,7 +340,7 @@
 
 - name: Deploy Artemis Frontend
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Add git safe directory for artemis-frontend
       git_config:
@@ -380,7 +380,7 @@
         state: directory
         owner: www-data
         group: www-data
-        recurse: yes
+        recurse: true
 
     - name: Setup npm environment
       block:
@@ -420,7 +420,7 @@
 
 - name: Configure Nginx
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Create SSL directory for nginx
       file:
@@ -456,7 +456,7 @@
         owner: root
         group: root
         mode: '0644'
-        backup: yes
+        backup: true
     
     - name: Remove unnecessary files from artemis-frontend directory
       file:
@@ -481,29 +481,29 @@
 
 - name: Start and Enable Services
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: Reload systemd daemon
       systemd:
-        daemon_reload: yes
+        daemon_reload: true
 
     - name: Start and enable scenario-manager-api service
       systemd:
         name: scenario-manager-api
         state: started
-        enabled: yes
+        enabled: true
 
     - name: Start and enable artemis-frontend service
       systemd:
         name: artemis-frontend
         state: started
-        enabled: yes
+        enabled: true
 
     - name: Start and enable nginx service
       systemd:
         name: nginx
         state: started
-        enabled: yes
+        enabled: true
 
     - name: Remove git safe directories
       git_config:
@@ -519,7 +519,7 @@
     # Additional systemd reload and nginx restart for extra safety
     - name: Final systemd daemon reload for safety
       systemd:
-        daemon_reload: yes
+        daemon_reload: true
 
     - name: Final nginx restart to ensure proper configuration loading
       systemd:
