@@ -275,6 +275,14 @@
         group: ludus
         mode: '0644'
 
+    - name: Copy /tmp/scenario-manager-api/server/data/topologies/ctfdev directory to scenario-manager-api data directory
+      copy:
+        src: "/tmp/scenario-manager-api/server/data/topologies/ctfdev/"
+        dest: "{{ scenario_api_dir }}/data/ctfdev"
+        owner: ludus
+        group: ludus
+        mode: '0755'
+
     - name: Copy /opt/scenario-manager-api/schemas directory to scenario-manager-api directory
       copy:
         src: "/tmp/scenario-manager-api/server/schemas/"
