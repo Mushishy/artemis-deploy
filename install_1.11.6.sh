@@ -524,7 +524,7 @@ main() {
   # fi
 
   # I only added this line
-  LATEST_TAG="1.11.5"
+  LATEST_TAG="1.11.6"
 
   ludus_bin_name="ludus-client"
   ludus_base_url="https://gitlab.com/api/v4/projects/$PROJECT_ID/packages/generic/ludus/$LATEST_TAG"

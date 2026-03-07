@@ -20,7 +20,7 @@ Follow the [Ludus quick-start guide](https://docs.ludus.cloud/docs/quick-start/i
 curl -s https://ludus.cloud/install | bash 
 ```
 
-Use the `install_1.11.5.sh` script. (for server name use ludus or you will have to change scenario-api `.env` file)
+Use the `install_1.11.6.sh` script. (for server name use ludus or you will have to change scenario-api `.env` file)
 
 To check the install status:
 
